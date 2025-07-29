@@ -1,0 +1,105 @@
+.services {
+    padding: 16px;
+    box-sizing: border-box;
+    background-color: #F6F6F6;
+    /* background-image: url("../../../public/assets/smooth-white-stucco-wall.webp"); */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.services-header {
+    margin-bottom: 5%;
+}
+
+.services-header h6 {
+    color: #4496D2;
+    text-align: center;
+    font-family: 'Schoolbell';
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    margin: 0px;
+}
+
+.services-header h1 {
+    color: #242020;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    text-align: center;
+}
+
+
+.service-cards-cont {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 16px;
+    /* padding: 16px; */
+    box-sizing: border-box;
+}
+
+.service-card {
+    border-radius: 20px;
+    background-color: #FFFFFF;
+    width: 100%;
+    max-width: 280px;
+    overflow: hidden;
+    box-shadow: 0 4px 21.9px 0 rgba(0, 0, 0, 0.01);
+}
+
+.service-card-image img {
+    width: 60px;
+}
+
+.service-card-detail {
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.service-card-head h5 {
+    color: #494949;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 0;
+    margin-bottom: 16px;
+}
+
+.service-card-text ul {
+    margin: 0;
+    /* padding: 0; */
+    padding-left: 12px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    list-style-type: disc; 
+}
+
+.service-card-text ul li {
+    color: #242020;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: start;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.service-card-text span {
+    color: #4496D2;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: start;
+    margin: 0;
+}

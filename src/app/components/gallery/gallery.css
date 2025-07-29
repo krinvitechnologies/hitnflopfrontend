@@ -1,0 +1,297 @@
+.campaigns {
+    padding: 16px;
+    box-sizing: border-box;
+    background-color: #F6F6F6;
+    /* background-image: url("../../../public/assets/smooth-white-stucco-wall.webp"); */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    min-height: 50vh;
+}
+
+.campaigns-header h6 {
+    color: #4496D2;
+    text-align: center;
+    font-family: 'Schoolbell';
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    margin: 0px;
+}
+
+.campaigns-header h1 {
+    color: #242020;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    text-align: center;
+}
+
+/* tab container */
+.campaigns-tab-cont {
+    background-color: #242020;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-sizing: border-box;
+    width: calc(100% - 20px);
+    margin: 10px auto;
+    margin-bottom: 50px;
+    border-radius: 30px;
+    height: 60px;
+}
+
+.campaigns-tab-cont button {
+    border: none;
+    background: transparent;
+    color: #F6F6F6;
+    font-family: 'Nunito';
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 10px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+/* active tab */
+.campaigns-tab-btn.active {
+    color: #4496D2;
+}
+
+.campaigns-cards-cont {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-evenly; */
+    justify-content: center;
+    /* justify-content: flex-end; */
+    gap: 16px;
+    /* padding: 16px; */
+    padding-top: 16px;
+    box-sizing: border-box;
+}
+
+.campaigns-swiper-slide{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.campaigns-card {
+    box-shadow: 0 4px 24.2px 0 rgba(0, 0, 0, 0.11);
+    border-radius: 16px;
+    background-color: #FFFFFF;
+    /* width: 100%; */
+    width: 45%;
+    /* max-width: 400px; */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+}
+
+.campign-card-img {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.campign-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.curve-image img {
+    width: 100%;
+    /* max-width: 360px; */
+}
+
+.curve-image {
+    width: 100%;
+    /* max-width: 360px; */
+    position: absolute;
+    bottom: -20px;
+    /* z-index: 10; */
+}
+
+.campign-card-bottom {
+    padding: 12px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background-color: #114274;
+    z-index: 1;
+}
+
+.campign-card-headline h5 {
+    color: #FFFFFF;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: start;
+    margin: 0;
+}
+
+.campign-card-info span {
+    /* color: #888888; */
+    color: #FCFEFF;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-size: 0.9rem;
+    font-weight: 400;
+    text-align: start;
+    margin: 0;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.campign-card-btn button {
+    background-color: #4496D2;
+    color: #F6F6F6;
+    border-radius: 16px;
+    box-sizing: border-box;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: center;
+    margin: 0;
+    width: 100%;
+    height: 45px;
+    border: none;
+    cursor: pointer;
+}
+
+.campign-card-btn button:hover {
+    opacity: 0.7;
+}
+
+.campign-card-price-cont {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    box-sizing: border-box;
+}
+
+.campign-card-price {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.campign-card-price span {
+    /* color: #4496D2; */
+    color: #FCFEFF;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: start;
+    margin: 0;
+}
+
+.campign-card-price p {
+    /* color: #212121; */
+    color: #FCFEFF;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: start;
+    margin: 0;
+}
+
+
+/* .curved-shape {
+    width: 100%;
+    height: 150px;
+    background: #114274;
+    border-top-left-radius: 50% 50px;
+    border-top-right-radius: 50% 50px;
+} */
+
+.curved-shape {
+    position: relative;
+    width: 100%;
+    /* height: 150px;  */
+    background-color: #114274;
+    clip-path: path("M0,100 C150,200 650,0 1000,100 L1000,200 L0,200 Z");
+}
+
+
+
+@media screen and (max-width:576px) {
+
+    .campaigns {
+        height: 100%;
+        min-height: 60vh;
+    }
+
+    .campaigns-cards-cont {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        gap: 16px;
+        height: 100%;
+        width: 100%;
+    }
+
+    .campaigns-card {
+        box-shadow: 0 4px 24.2px 0 rgba(0, 0, 0, 0.11);
+        border-radius: 16px;
+        background-color: #FFFFFF;
+        width: 100%;
+        /* max-width: 400px; */
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        /* justify-content: space-between; */
+    }
+
+    /* tab container */
+    .campaigns-tab-cont {
+        background-color: #242020;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        box-sizing: border-box;
+        width: 100%;
+        margin: 10px auto;
+        margin-bottom: 50px;
+        border-radius: 30px;
+        height: 50px;
+    }
+
+    .campaigns-tab-cont button {
+        border: none;
+        background: transparent;
+        color: #F6F6F6;
+        font-family: 'Nunito';
+        font-size: 0.8rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 21px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        cursor: pointer;
+        padding: 6px;
+        box-sizing: border-box;
+    }
+
+}
