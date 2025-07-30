@@ -8,21 +8,21 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
-import Cookies from 'js-cookie';
-// import Api from '@/app/service/api'; 
 import { toast } from 'react-toastify';
-
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
+// import { ToastContainer } from 'react-toastify';
 import { registerUser } from '@/src/app/lib/store/features/user/userSlice';
 import { useDispatch } from 'react-redux';
+import HttpsOutlinedIcon from '@mui/icons-material/HttpsOutlined';
+import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import Link from 'next/link';
 
 const SignUp = () => {
     const [input, setInput] = useState({
         email: '',
-        firstName: '',
+        name: '',
         mobile: '',
-        lastName: '',
         password: '',
         confirmPassword: '',
     });
@@ -48,7 +48,7 @@ const SignUp = () => {
         try {
             const payload = {
                 email: input.email.trim().toLowerCase(),
-                name: `${input.firstName} ${input.lastName}`.trim(),
+                name: input.name.trim(),
                 mobile: input.mobile,
                 password: input.password,
             };
@@ -60,18 +60,6 @@ const SignUp = () => {
             } else {
                 toast.error(result.payload || "Registration failed");
             }
-
-            //   const result = await Api.signup(payload);
-
-            //   // Set token to cookies
-            //   if (result?.token) {
-            //     Cookies.set('hitnflop_token', result.token, { expires: 7 }); // 7 days
-            //     toast.success('Signup successful!');
-            //     router.push('/');
-            //   } else {
-            //     toast.error('Signup failed: No token received.');
-            //   }
-
         } catch (err) {
             const errorMessage = err?.response?.data?.message || err.message || 'Signup failed.';
             toast.error(errorMessage);
@@ -82,9 +70,9 @@ const SignUp = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const { email, firstName, lastName, mobile, password, confirmPassword } = input;
+        const { email, name, mobile, password, confirmPassword } = input;
 
-        if (!email || !firstName || !lastName || !password) {
+        if (!email || !name || !password) {
             toast.warning('Please fill all the required fields.');
             return;
         }
@@ -103,61 +91,67 @@ const SignUp = () => {
     };
 
     return (
-        <>
-            <div className="flex h-screen bg-[#E7E6F5] max-md:h-full min-h-screen">
-                <div className="w-[50%] flex flex-col justify-center items-center gap-6 p-4 box-border max-md:w-full bg-[#E7E6F5]">
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-2 w-full max-w-sm">
-                        <header className="flex items-center justify-center w-full">
-                            <figure className="w-[80%] h-auto">
-                                <Image
-                                    src="/assets/logo/Table Host Blue.svg"
-                                    alt="Table Host"
-                                    width={300}
-                                    height={100}
-                                    priority
-                                />
-                            </figure>
-                        </header>
+        <div className="flex w-full h-screen bg-[#0F1014]">
+            {/* <ToastContainer /> */}
+            {/* Left Side */}
+            <div className="w-full min-h-screen bg-[#164A96] flex justify-center items-center max-md:hidden">
+                <figcaption className="w-full h-auto min-h-screen">
+                    <Image
+                        src="/assets/auth/register.webp"
+                        alt="Register"
+                        width={1920}
+                        height={1080}
+                        className="w-full h-full object-cover"
+                        priority
+                    />
+                </figcaption>
+            </div>
 
-                        <label className="flex flex-col gap-1 text-base font-semibold text-[#1F2122] font-inter">
-                            Email
-                            <input
-                                type="email"
-                                name="email"
-                                value={input.email}
-                                onChange={_onChange}
-                                placeholder="Email"
-                                required
-                                className="px-2 py-2 border border-[#BCBFC1] rounded-lg outline-none"
-                            />
+            {/* Right Side */}
+            <div className="w-[50%] p-4 bg-[#0F1014] flex flex-col justify-center items-center max-md:w-full max-md:bg-gradient-to-br from-yellow-400/60 to-blue-600/70">
+                <div className="w-full max-w-sm  max-md:pl-0 flex flex-col items-center">
+                    <nav className="w-full mb-6 flex flex-col justify-center">
+                        <h1 className="text-[#FFFFFF] text-4xl font-bold mb-4 font-[family-name:var(--font-roboto)]">Sign up</h1>
+                        <h4 className="text-[#FFFFFF] font-semibold mb-4 font-[family-name:var(--font-roboto)]">If you already have an account register You can <Link href="/login" className="text-[#FF6D3E] font-semibold font-[family-name:var(--font-roboto)]">Login here !</Link></h4>
+                    </nav>
+
+                    <form
+                        onSubmit={handleSubmit}
+                        className="w-full max-w-screen-sm flex flex-col gap-6"
+                    >
+                        <label className="text-base font-semibold text-[#FFFFFF] flex flex-col font-[family-name:var(--font-roboto)]">
+                            Name
+                            <div className="flex items-center border-0 border-b-2 border-[#FFFFFF] py-2 box-border">
+                                <span className="cursor-pointer text-[#FFFFFF] font-normal">
+                                    <PersonOutlineOutlinedIcon />
+                                </span>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    value={input.name}
+                                    onChange={_onChange}
+                                    placeholder="Enter name"
+                                    className="w-full outline-none text-[#FFFFFF] font-normal font-[family-name:var(--font-roboto)] pl-2 box-border"
+                                />
+                            </div>
                         </label>
 
-                        <div className="flex gap-2">
-                            <label className="flex flex-col gap-1 w-full text-base font-semibold text-[#1F2122] font-inter">
-                                First Name
+                        <label className="text-base font-semibold text-[#FFFFFF] flex flex-col font-[family-name:var(--font-roboto)]">
+                            Email
+                            <div className="flex items-center border-0 border-b-2 border-[#FFFFFF] py-2 box-border">
+                                <span className="cursor-pointer text-[#FFFFFF] font-normal">
+                                    <MailOutlineOutlinedIcon />
+                                </span>
                                 <input
-                                    type="text"
-                                    name="firstName"
-                                    value={input.firstName}
+                                    type="email"
+                                    name="email"
+                                    value={input.email}
                                     onChange={_onChange}
-                                    placeholder="First name"
-                                    required
-                                    className="px-2 py-2 border border-[#BCBFC1] rounded-lg outline-none"
+                                    placeholder="Enter email"
+                                    className="w-full outline-none text-[#FFFFFF] font-normal font-[family-name:var(--font-roboto)] pl-2 box-border"
                                 />
-                            </label>
-                            <label className="flex flex-col gap-1 w-full text-base font-semibold text-[#1F2122] font-inter">
-                                Last Name
-                                <input
-                                    type="text"
-                                    name="lastName"
-                                    value={input.lastName}
-                                    onChange={_onChange}
-                                    placeholder="Last name"
-                                    required
-                                    className="px-2 py-2 border border-[#BCBFC1] rounded-lg outline-none"
-                                />
-                            </label>
-                        </div>
+                            </div>
+                        </label>
 
                         {/* <label className="flex flex-col gap-1 text-base font-semibold text-[#1F2122] font-inter">
                             Phone Number
@@ -179,33 +173,39 @@ const SignUp = () => {
                             />
                         </label> */}
 
-                        <label label className="flex flex-col gap-1 text-base font-semibold text-[#1F2122] font-inter">
-                            Set Password
-                            <div className="flex items-center border border-[#AAADB1] rounded-lg bg-white p-2">
+                        <label className="text-base font-semibold text-[#FFFFFF] flex flex-col font-[family-name:var(--font-roboto)]">
+                            Password
+                            <div className="flex items-center border-0 border-b-2 border-[#FFFFFF] py-2 box-border">
+                                <span className="cursor-pointer text-[#FFFFFF] font-normal">
+                                    <HttpsOutlinedIcon />
+                                </span>
                                 <input
                                     type={showPassword ? 'text' : 'password'}
                                     name="password"
                                     value={input.password}
                                     onChange={_onChange}
-                                    placeholder="Password"
-                                    className="w-full outline-none"
+                                    placeholder="Enter password"
+                                    className="w-full outline-none text-[#FFFFFF] font-normal font-[family-name:var(--font-roboto)] pl-2 box-border"
                                 />
-                                <span onClick={() => setShowPassword(prev => !prev)} className="cursor-pointer">
+                                <span onClick={() => setShowPassword(!showPassword)} className="cursor-pointer text-[#FFFFFF]">
                                     {showPassword ? <VisibilityOutlinedIcon /> : <VisibilityOffOutlinedIcon />}
                                 </span>
                             </div>
                         </label>
 
-                        <label className="flex flex-col gap-1 text-base font-semibold text-[#1F2122] font-inter">
-                            Re-enter Password
-                            <div className="flex items-center border border-[#AAADB1] rounded-lg bg-white p-2">
+                        <label className="text-base font-semibold text-[#FFFFFF] flex flex-col font-[family-name:var(--font-roboto)]">
+                            Confirm Password
+                            <div className="flex items-center border-0 border-b-2 border-[#FFFFFF] py-2 box-border">
+                                <span className="cursor-pointer text-[#FFFFFF] font-normal">
+                                    <HttpsOutlinedIcon />
+                                </span>
                                 <input
                                     type={showConfirmPassword ? 'text' : 'password'}
                                     name="confirmPassword"
                                     value={input.confirmPassword}
                                     onChange={_onChange}
-                                    placeholder="Confirm Password"
-                                    className="w-full outline-none"
+                                    placeholder="Enter confirm password"
+                                    className="w-full outline-none text-[#FFFFFF] font-normal font-[family-name:var(--font-roboto)] pl-2 box-border"
                                 />
                                 <span onClick={() => setShowConfirmPassword(prev => !prev)} className="cursor-pointer">
                                     {showConfirmPassword ? <VisibilityOutlinedIcon /> : <VisibilityOffOutlinedIcon />}
@@ -213,44 +213,178 @@ const SignUp = () => {
                             </div>
                         </label>
 
-                        <div className="flex justify-center">
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                disabled={loading}
-                                sx={{
-                                    textTransform: 'none',
-                                    background: '#0265DC',
-                                    fontSize: '1rem',
-                                    fontWeight: 600,
-                                    fontFamily: 'var(--font-inter)',
-                                    borderRadius: '8px',
-                                    width: '85%',
-                                    mt: 2
-                                }}
-                            >
-                                {loading ? 'Signing Up...' : 'Sign Up'}
-                            </Button>
-                        </div>
-                    </form>
-                </div>
 
-                <div className="w-full hidden max-md:hidden md:flex items-end justify-end bg-[#E7E6F5]">
-                    <figure className="w-full">
-                        <Image
-                            src="/assets/images/login/Login2.png"
-                            alt="SignUp Illustration"
-                            width={800}
-                            height={800}
-                            priority
-                        />
-                    </figure>
+                        <Button
+                            variant="contained"
+                            type="submit"
+                            disabled={loading}
+                            sx={{
+                                color: '#FFFFFF',
+                                background: '#FF6D3E',
+                                fontSize: '1rem',
+                                fontWeight: '600',
+                                fontFamily: 'var(--font-inter)',
+                                textTransform: 'none',
+                                borderRadius: '6rem'
+                            }}
+                            className="primary-button rounded-lg mt-3"
+                        >
+                            {loading ? 'Signing Up...' : 'Sign Up'}
+                        </Button>
+                    </form>
                 </div>
             </div>
 
-            {/* Toast container for messages */}
-            <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
-        </>
+        </div>
+
+        // <>
+        //     <div className="flex h-screen bg-[#E7E6F5] max-md:h-full min-h-screen">
+        //         <div className="w-[50%] flex flex-col justify-center items-center gap-6 p-4 box-border max-md:w-full bg-[#E7E6F5]">
+        //             <form onSubmit={handleSubmit} className="flex flex-col gap-2 w-full max-w-sm">
+        //                 <header className="flex items-center justify-center w-full">
+        //                     <figure className="w-[80%] h-auto">
+        //                         <Image
+        //                             src="/assets/logo/Table Host Blue.svg"
+        //                             alt="Table Host"
+        //                             width={300}
+        //                             height={100}
+        //                             priority
+        //                         />
+        //                     </figure>
+        //                 </header>
+
+        //                 <label className="flex flex-col gap-1 text-base font-semibold text-[#1F2122] font-inter">
+        //                     Email
+        //                     <input
+        //                         type="email"
+        //                         name="email"
+        //                         value={input.email}
+        //                         onChange={_onChange}
+        //                         placeholder="Email"
+        //                         required
+        //                         className="px-2 py-2 border border-[#BCBFC1] rounded-lg outline-none"
+        //                     />
+        //                 </label>
+
+        //                 <div className="flex gap-2">
+        //                     <label className="flex flex-col gap-1 w-full text-base font-semibold text-[#1F2122] font-inter">
+        //                         First Name
+        //                         <input
+        //                             type="text"
+        //                             name="firstName"
+        //                             value={input.firstName}
+        //                             onChange={_onChange}
+        //                             placeholder="First name"
+        //                             required
+        //                             className="px-2 py-2 border border-[#BCBFC1] rounded-lg outline-none"
+        //                         />
+        //                     </label>
+        //                     <label className="flex flex-col gap-1 w-full text-base font-semibold text-[#1F2122] font-inter">
+        //                         Last Name
+        //                         <input
+        //                             type="text"
+        //                             name="lastName"
+        //                             value={input.lastName}
+        //                             onChange={_onChange}
+        //                             placeholder="Last name"
+        //                             required
+        //                             className="px-2 py-2 border border-[#BCBFC1] rounded-lg outline-none"
+        //                         />
+        //                     </label>
+        //                 </div>
+
+        //                 {/* <label className="flex flex-col gap-1 text-base font-semibold text-[#1F2122] font-inter">
+        //                     Phone Number
+        //                     <PhoneInput
+        //                         country="us"
+        //                         value={input.mobile}
+        //                         onChange={handlePhoneChange}
+        //                         inputStyle={{
+        //                             width: '100%',
+        //                             padding: '14px 12px',
+        //                             fontSize: '1rem',
+        //                             borderRadius: '8px',
+        //                             border: '1px solid #AAADB1'
+        //                         }}
+        //                         buttonStyle={{
+        //                             border: '1px solid #AAADB1',
+        //                             borderRadius: '8px',
+        //                         }}
+        //                     />
+        //                 </label> */}
+
+        //                 <label label className="flex flex-col gap-1 text-base font-semibold text-[#1F2122] font-inter">
+        //                     Set Password
+        //                     <div className="flex items-center border border-[#AAADB1] rounded-lg bg-white p-2">
+        //                         <input
+        //                             type={showPassword ? 'text' : 'password'}
+        //                             name="password"
+        //                             value={input.password}
+        //                             onChange={_onChange}
+        //                             placeholder="Password"
+        //                             className="w-full outline-none"
+        //                         />
+        //                         <span onClick={() => setShowPassword(prev => !prev)} className="cursor-pointer">
+        //                             {showPassword ? <VisibilityOutlinedIcon /> : <VisibilityOffOutlinedIcon />}
+        //                         </span>
+        //                     </div>
+        //                 </label>
+
+        //                 <label className="flex flex-col gap-1 text-base font-semibold text-[#1F2122] font-inter">
+        //                     Re-enter Password
+        //                     <div className="flex items-center border border-[#AAADB1] rounded-lg bg-white p-2">
+        //                         <input
+        //                             type={showConfirmPassword ? 'text' : 'password'}
+        //                             name="confirmPassword"
+        //                             value={input.confirmPassword}
+        //                             onChange={_onChange}
+        //                             placeholder="Confirm Password"
+        //                             className="w-full outline-none"
+        //                         />
+        //                         <span onClick={() => setShowConfirmPassword(prev => !prev)} className="cursor-pointer">
+        //                             {showConfirmPassword ? <VisibilityOutlinedIcon /> : <VisibilityOffOutlinedIcon />}
+        //                         </span>
+        //                     </div>
+        //                 </label>
+
+        //                 <div className="flex justify-center">
+        //                     <Button
+        //                         type="submit"
+        //                         variant="contained"
+        //                         disabled={loading}
+        //                         sx={{
+        //                             textTransform: 'none',
+        //                             background: '#0265DC',
+        //                             fontSize: '1rem',
+        //                             fontWeight: 600,
+        //                             fontFamily: 'var(--font-inter)',
+        //                             borderRadius: '8px',
+        //                             width: '85%',
+        //                             mt: 2
+        //                         }}
+        //                     >
+        //                         {loading ? 'Signing Up...' : 'Sign Up'}
+        //                     </Button>
+        //                 </div>
+        //             </form>
+        //         </div>
+
+        //         <div className="w-full hidden max-md:hidden md:flex items-end justify-end bg-[#E7E6F5]">
+        //             <figure className="w-full">
+        //                 <Image
+        //                     src="/assets/images/login/Login2.png"
+        //                     alt="SignUp Illustration"
+        //                     width={800}
+        //                     height={800}
+        //                     priority
+        //                 />
+        //             </figure>
+        //         </div>
+        //     </div>
+
+        //     {/* Toast container for messages */}
+        //     <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
+        // </>
     );
 };
 
