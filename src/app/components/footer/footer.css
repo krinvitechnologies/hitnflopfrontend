@@ -2,7 +2,7 @@
     padding: 40px 16px;
     box-sizing: border-box;
     height: 100%;
-    background-color: #ECF7FF;
+    background: rgba(15, 16, 20, 1);
 }
 
 .footer-cont {
@@ -24,8 +24,8 @@
 }
 
 .footer-item p {
-    color: #101010;
-    font-family: 'Nunito';
+    color: #FFFFFF;
+    font-family: 'Inter';
     font-style: normal;
     font-size: 1rem;
     font-weight: 600;
@@ -42,8 +42,8 @@
 }
 
 .footer-menu-list span {
-    color: #101010;
-    font-family: 'Nunito';
+    color: #FFFFFF;
+    font-family: 'Inter';
     font-style: normal;
     font-size: 1rem;
     font-weight: 600;
@@ -60,8 +60,8 @@
 }
 
 .fs-cont label {
-    color: #101010;
-    font-family: 'Nunito';
+    color: #FFFFFF;
+    font-family: 'Inter';
     font-style: normal;
     font-size: 1rem;
     font-weight: 600;
@@ -208,7 +208,7 @@
 
     .footer-location h6 {
         color: #101010;
-        font-family: 'Nunito';
+        font-family: 'Inter';
         font-style: normal;
         font-size: 0.9rem;
         font-weight: 600;
@@ -220,8 +220,8 @@
     }
 
     .footer-menu-list span {
-        color: #101010;
-        font-family: 'Nunito';
+        color: #FFFFFF;
+        font-family: 'Inter';
         font-style: normal;
         font-size: 1rem;
         font-weight: 600;

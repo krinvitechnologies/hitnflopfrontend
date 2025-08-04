@@ -55,13 +55,13 @@ const SignUp = () => {
             // dispatch(registerUser(payload));
             const result = await dispatch(registerUser(payload));
             if (registerUser.fulfilled.match(result)) {
-                toast.success("Registration successful");
+                toast.success("Registration completed successfully!");
                 navigate("/dashboard");
             } else {
-                toast.error(result.payload || "Registration failed");
+                toast.error(result.payload || "Registration failed. Please try again.");
             }
         } catch (err) {
-            const errorMessage = err?.response?.data?.message || err.message || 'Signup failed.';
+            const errorMessage = err?.response?.data?.message || err.message || 'An unexpected error occurred. Please try again later.';
             toast.error(errorMessage);
         } finally {
             setLoading(false);
@@ -73,17 +73,17 @@ const SignUp = () => {
         const { email, name, mobile, password, confirmPassword } = input;
 
         if (!email || !name || !password) {
-            toast.warning('Please fill all the required fields.');
+            toast.warning('Please fill out all required fields.');
             return;
         }
 
         if (password.length < 8) {
-            toast.warning('Password must be at least 8 characters.');
+            toast.warning('Password must be at least 8 characters long.');
             return;
         }
 
         if (password !== confirmPassword) {
-            toast.error('Passwords do not match.');
+            toast.error('Password and Confirm Password do not match.');
             return;
         }
 
@@ -236,155 +236,6 @@ const SignUp = () => {
             </div>
 
         </div>
-
-        // <>
-        //     <div className="flex h-screen bg-[#E7E6F5] max-md:h-full min-h-screen">
-        //         <div className="w-[50%] flex flex-col justify-center items-center gap-6 p-4 box-border max-md:w-full bg-[#E7E6F5]">
-        //             <form onSubmit={handleSubmit} className="flex flex-col gap-2 w-full max-w-sm">
-        //                 <header className="flex items-center justify-center w-full">
-        //                     <figure className="w-[80%] h-auto">
-        //                         <Image
-        //                             src="/assets/logo/Table Host Blue.svg"
-        //                             alt="Table Host"
-        //                             width={300}
-        //                             height={100}
-        //                             priority
-        //                         />
-        //                     </figure>
-        //                 </header>
-
-        //                 <label className="flex flex-col gap-1 text-base font-semibold text-[#1F2122] font-inter">
-        //                     Email
-        //                     <input
-        //                         type="email"
-        //                         name="email"
-        //                         value={input.email}
-        //                         onChange={_onChange}
-        //                         placeholder="Email"
-        //                         required
-        //                         className="px-2 py-2 border border-[#BCBFC1] rounded-lg outline-none"
-        //                     />
-        //                 </label>
-
-        //                 <div className="flex gap-2">
-        //                     <label className="flex flex-col gap-1 w-full text-base font-semibold text-[#1F2122] font-inter">
-        //                         First Name
-        //                         <input
-        //                             type="text"
-        //                             name="firstName"
-        //                             value={input.firstName}
-        //                             onChange={_onChange}
-        //                             placeholder="First name"
-        //                             required
-        //                             className="px-2 py-2 border border-[#BCBFC1] rounded-lg outline-none"
-        //                         />
-        //                     </label>
-        //                     <label className="flex flex-col gap-1 w-full text-base font-semibold text-[#1F2122] font-inter">
-        //                         Last Name
-        //                         <input
-        //                             type="text"
-        //                             name="lastName"
-        //                             value={input.lastName}
-        //                             onChange={_onChange}
-        //                             placeholder="Last name"
-        //                             required
-        //                             className="px-2 py-2 border border-[#BCBFC1] rounded-lg outline-none"
-        //                         />
-        //                     </label>
-        //                 </div>
-
-        //                 {/* <label className="flex flex-col gap-1 text-base font-semibold text-[#1F2122] font-inter">
-        //                     Phone Number
-        //                     <PhoneInput
-        //                         country="us"
-        //                         value={input.mobile}
-        //                         onChange={handlePhoneChange}
-        //                         inputStyle={{
-        //                             width: '100%',
-        //                             padding: '14px 12px',
-        //                             fontSize: '1rem',
-        //                             borderRadius: '8px',
-        //                             border: '1px solid #AAADB1'
-        //                         }}
-        //                         buttonStyle={{
-        //                             border: '1px solid #AAADB1',
-        //                             borderRadius: '8px',
-        //                         }}
-        //                     />
-        //                 </label> */}
-
-        //                 <label label className="flex flex-col gap-1 text-base font-semibold text-[#1F2122] font-inter">
-        //                     Set Password
-        //                     <div className="flex items-center border border-[#AAADB1] rounded-lg bg-white p-2">
-        //                         <input
-        //                             type={showPassword ? 'text' : 'password'}
-        //                             name="password"
-        //                             value={input.password}
-        //                             onChange={_onChange}
-        //                             placeholder="Password"
-        //                             className="w-full outline-none"
-        //                         />
-        //                         <span onClick={() => setShowPassword(prev => !prev)} className="cursor-pointer">
-        //                             {showPassword ? <VisibilityOutlinedIcon /> : <VisibilityOffOutlinedIcon />}
-        //                         </span>
-        //                     </div>
-        //                 </label>
-
-        //                 <label className="flex flex-col gap-1 text-base font-semibold text-[#1F2122] font-inter">
-        //                     Re-enter Password
-        //                     <div className="flex items-center border border-[#AAADB1] rounded-lg bg-white p-2">
-        //                         <input
-        //                             type={showConfirmPassword ? 'text' : 'password'}
-        //                             name="confirmPassword"
-        //                             value={input.confirmPassword}
-        //                             onChange={_onChange}
-        //                             placeholder="Confirm Password"
-        //                             className="w-full outline-none"
-        //                         />
-        //                         <span onClick={() => setShowConfirmPassword(prev => !prev)} className="cursor-pointer">
-        //                             {showConfirmPassword ? <VisibilityOutlinedIcon /> : <VisibilityOffOutlinedIcon />}
-        //                         </span>
-        //                     </div>
-        //                 </label>
-
-        //                 <div className="flex justify-center">
-        //                     <Button
-        //                         type="submit"
-        //                         variant="contained"
-        //                         disabled={loading}
-        //                         sx={{
-        //                             textTransform: 'none',
-        //                             background: '#0265DC',
-        //                             fontSize: '1rem',
-        //                             fontWeight: 600,
-        //                             fontFamily: 'var(--font-inter)',
-        //                             borderRadius: '8px',
-        //                             width: '85%',
-        //                             mt: 2
-        //                         }}
-        //                     >
-        //                         {loading ? 'Signing Up...' : 'Sign Up'}
-        //                     </Button>
-        //                 </div>
-        //             </form>
-        //         </div>
-
-        //         <div className="w-full hidden max-md:hidden md:flex items-end justify-end bg-[#E7E6F5]">
-        //             <figure className="w-full">
-        //                 <Image
-        //                     src="/assets/images/login/Login2.png"
-        //                     alt="SignUp Illustration"
-        //                     width={800}
-        //                     height={800}
-        //                     priority
-        //                 />
-        //             </figure>
-        //         </div>
-        //     </div>
-
-        //     {/* Toast container for messages */}
-        //     <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
-        // </>
     );
 };
 

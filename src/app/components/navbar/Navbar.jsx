@@ -10,7 +10,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
-export const Navbar = () => {
+const Navbar = () => {
 
     const router = useRouter();
 
@@ -87,13 +87,13 @@ export const Navbar = () => {
                     <DialogContent>
                         <div className="modal-content">
                             <div className="nav-btn-cont-mob">
-                                <Link to="/" className='nav-link'>
+                                <Link href="/" className='nav-link'>
                                     <button className='nav-btn-mob'>Movies</button>
                                 </Link>
-                                <Link to="/" className='nav-link'>
+                                <Link href="/" className='nav-link'>
                                     <button className='nav-btn-mob' onClick={handleCampaignsClick}>Series</button>
                                 </Link>
-                                <Link to="/" className='nav-link'>
+                                <Link href="/" className='nav-link'>
                                     <button className='nav-btn-mob' onClick={handleContactClick}>Watchlist</button>
                                 </Link>
                                 {token ? (
@@ -110,3 +110,5 @@ export const Navbar = () => {
         </div>
     );
 };
+
+export default Navbar

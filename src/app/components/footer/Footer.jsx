@@ -1,14 +1,16 @@
+'use client';
+
 import React, { useState } from 'react'
 import "./footer.css"
 // import { FaTelegramPlane } from "react-icons/fa";
 // import { FaFacebook, FaInstagram, FaLocationDot, FaPhone } from 'react-icons/fa6';
 // import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import validator from "validator";
+// import validator from "validator";
 // import { axiosRequest } from '../../services/ApiCall';
 import { ClipLoader } from 'react-spinners';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link'; 
+import Link from 'next/link';
 
 const Footer = () => {
 
@@ -24,9 +26,11 @@ const Footer = () => {
         try {
             if (!mobile.trim()) {
                 toast.error('Phone number is required');
-            } else if (!validator.isMobilePhone(mobile, 'en-IN')) {
-                toast.error('Please enter a valid Phone Number');
-            } else {
+            }
+            // else if (!validator.isMobilePhone(mobile, 'en-IN')) {
+            //     toast.error('Please enter a valid Phone Number');
+            // } 
+            else {
                 // const response = await axiosRequest.post('/subscribe', {
                 //     mobile,
                 // });
@@ -105,12 +109,8 @@ const Footer = () => {
         <div className="footer">
             <div className="footer-cont">
                 <div className="footer-item">
-                    <img src="/assets/logo.png" alt="SKP" />
-                    <p>Shree Kishori Priya Foundation is a sanctuary
-                        of care and compassion, dedicated to
-                        providing elderly women with dignity,
-                        empowerment, amd a vibrant community.
-                    </p>
+                    <img src="/assets/logo/hitnflop.webp" alt="hitnflop" onClick={() => router.push('/')} />
+                    <p>HitnFlop is your ultimate destination for sharing honest reviews on movies and web series. Watch, review, and earn rewards while helping others discover what’s worth watching.</p>
                 </div>
 
                 <div className="footer-menu-list">

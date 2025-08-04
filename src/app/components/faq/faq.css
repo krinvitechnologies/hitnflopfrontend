@@ -1,0 +1,29 @@
+.faq-header {
+    background: #4496D2;
+    padding: 4rem 1rem;
+    box-sizing: border-box;
+}
+
+.faq-header h1 {
+    color: #FFFFFF;
+}
+
+.faq-container {
+    padding: 1.6rem 1rem;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 768px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0 auto;
+    gap: 1.2rem;
+}
+
+.faq-box{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+}
