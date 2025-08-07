@@ -64,13 +64,14 @@
 @media screen and (max-width:576px) {
     .banner {
         width: 100vw;
-        background: #ECF7FF;
+        background: #0F1014;
         min-height: 25vh;
     }
 
     .banner img {
         width: 100%;
         height: auto;
+        max-height: none;
         object-fit: cover;
     }
 }

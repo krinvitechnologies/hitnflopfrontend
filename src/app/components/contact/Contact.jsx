@@ -2,30 +2,54 @@
 
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import contactImage from '../../assets/contact/contact.webp';
+import { createContact } from '../../lib/store/features/contact/contactSlice';
+import { useDispatch } from 'react-redux';
 
 const Contact = () => {
+    const dispatch = useDispatch();
+
     const [name, setName] = useState('');
-    const [phoneNo, setPhoneNo] = useState('');
+    const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const nameRegex = /^[a-zA-Z\s]+$/;  // Name: No special characters
+
     const handleContact = async (e) => {
         e.preventDefault();
+
+        if (!name || !email || !message) {
+            toast.error('All fields are required');
+            return;
+        }
+
+        if (!nameRegex.test(name)) {
+            toast.error('Name should not contain special characters or numbers.');
+            return;
+        }
+
+        if (!emailRegex.test(email)) {
+            toast.error('Please enter a valid email address.');
+            return;
+        }
+
         setIsLoading(true);
+
         try {
-            if (!name || !message || !phoneNo) {
-                toast.error('All fields are required');
-            } else {
-                // Simulate sending message
+            const payload = { name, email, message };
+            const result = await dispatch(createContact(payload));
+
+            if (createContact.fulfilled.match(result)) {
+                toast.success("Message sent successfully!");
                 setName('');
-                setPhoneNo('');
+                setEmail('');
                 setMessage('');
+            } else {
+                toast.error(result.payload || "Message failed. Please try again.");
             }
         } catch (error) {
-            if (error.response) {
-                toast.error(error?.response?.data?.message);
-            }
+            toast.error("Something went wrong. Please try again.");
         } finally {
             setIsLoading(false);
         }
@@ -38,41 +62,41 @@ const Contact = () => {
                     <img src="/assets/contact/contact_us.png" alt="Contact Us" className="w-full rounded-2xl" />
                 </div>
                 <div className="flex flex-col items-start w-full max-w-md">
-                    <h1 className="text-white text-4xl font-bold font-inter mb-4">Contact Us</h1>
+                    <h1 className="text-white text-4xl font-bold font-[family-name:var(--font-inter)] mb-4">Contact Us</h1>
                     <form className="flex flex-col gap-4 w-full" onSubmit={handleContact}>
-                        <label className="text-white text-base font-semibold font-inter flex flex-col">
+                        <label className="text-white text-base font-semibold font-[family-name:var(--font-inter)] flex flex-col">
                             Full Name
                             <input
                                 type="text"
                                 name="name"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
-                                className="bg-transparent text-white border-b-2 border-white outline-none font-inter font-semibold text-base"
+                                className="bg-transparent text-white border-b-2 border-white outline-none font-[family-name:var(--font-inter)] font-semibold text-base"
                             />
                         </label>
-                        <label className="text-white text-base font-semibold font-inter flex flex-col">
-                            Phone no.
+                        <label className="text-white text-base font-semibold font-[family-name:var(--font-inter)]r flex flex-col">
+                            Email
                             <input
-                                type="tel"
-                                name="phone"
-                                value={phoneNo}
-                                onChange={(e) => setPhoneNo(e.target.value)}
-                                className="bg-transparent text-white border-b-2 border-white outline-none font-inter font-semibold text-base"
+                                type="email"
+                                name="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="bg-transparent text-white border-b-2 border-white outline-none font-[family-name:var(--font-inter)] font-semibold text-base"
                             />
                         </label>
-                        <label className="text-white text-base font-semibold font-inter flex flex-col">
+                        <label className="text-white text-base font-semibold font-[family-name:var(--font-inter)] flex flex-col">
                             Message
                             <input
-                                type="message"
+                                type="text"
                                 name="message"
                                 value={message}
                                 onChange={(e) => setMessage(e.target.value)}
-                                className="bg-transparent text-white border-b-2 border-white outline-none font-inter font-semibold text-base"
+                                className="bg-transparent text-white border-b-2 border-white outline-none font-[family-name:var(--font-inter)] font-semibold text-base"
                             />
                         </label>
                         <button
                             type="submit"
-                            className="w-full h-[45px] bg-[#FF6D3E] text-white text-base font-medium font-Inter rounded-full hover:opacity-80 transition-all duration-200"
+                            className="w-full h-[45px] bg-[#FF6D3E] text-white text-base font-medium font-[family-name:var(--font-inter)] rounded-full hover:opacity-80 transition-all duration-200"
                             disabled={isLoading}
                         >
                             {isLoading ? 'Loading...' : 'Contact Us'}
@@ -85,6 +109,99 @@ const Contact = () => {
 };
 
 export default Contact;
+
+
+
+// 'use client';
+
+// import React, { useState } from 'react';
+// import { toast } from 'react-toastify';
+// import { createContact } from '../../lib/store/features/contact/contactSlice';
+
+// const Contact = () => {
+//     const [name, setName] = useState('');
+//     const [phoneNo, setPhoneNo] = useState('');
+//     const [message, setMessage] = useState('');
+//     const [isLoading, setIsLoading] = useState(false);
+
+//     const handleContact = async (e) => {
+//         e.preventDefault();
+//         setIsLoading(true);
+//         try {
+//             if (!name || !message || !phoneNo) {
+//                 toast.error('All fields are required');
+//             }
+//             const result = await dispatch(createContact(payload));
+
+//             if (createContact.fulfilled.match(result)) {
+//                 toast.success("Subscribed successfully!");
+//                 setName('');
+//                 setPhoneNo('');
+//                 setMessage('');
+//             } else {
+//                 toast.error(result.payload || "Subscription failed. Please try again.");
+//             }
+//         } catch (error) {
+//             toast.error("Something went wrong. Please try again.");
+//         } finally {
+//             setIsLoading(false);
+//         }
+//     };
+
+//     return (
+//         <div id="contact" className="flex justify-center bg-[#0F1014] py-8 box-border">
+//             <div className="flex flex-wrap md:flex-nowrap justify-around items-center min-h-[10vh] bg-[#15161B] w-full max-w-5xl rounded-2xl p-6 gap-4 box-border">
+//                 <div className="w-full md:max-w-[300px]">
+//                     <img src="/assets/contact/contact_us.png" alt="Contact Us" className="w-full rounded-2xl" />
+//                 </div>
+//                 <div className="flex flex-col items-start w-full max-w-md">
+//                     <h1 className="text-white text-4xl font-bold font-inter mb-4">Contact Us</h1>
+//                     <form className="flex flex-col gap-4 w-full" onSubmit={handleContact}>
+//                         <label className="text-white text-base font-semibold font-inter flex flex-col">
+//                             Full Name
+//                             <input
+//                                 type="text"
+//                                 name="name"
+//                                 value={name}
+//                                 onChange={(e) => setName(e.target.value)}
+//                                 className="bg-transparent text-white border-b-2 border-white outline-none font-inter font-semibold text-base"
+//                             />
+//                         </label>
+//                         <label className="text-white text-base font-semibold font-inter flex flex-col">
+//                             Phone no.
+//                             <input
+//                                 type="tel"
+//                                 name="phone"
+//                                 value={phoneNo}
+//                                 onChange={(e) => setPhoneNo(e.target.value)}
+//                                 className="bg-transparent text-white border-b-2 border-white outline-none font-inter font-semibold text-base"
+//                             />
+//                         </label>
+//                         <label className="text-white text-base font-semibold font-inter flex flex-col">
+//                             Message
+//                             <input
+//                                 type="message"
+//                                 name="message"
+//                                 value={message}
+//                                 onChange={(e) => setMessage(e.target.value)}
+//                                 className="bg-transparent text-white border-b-2 border-white outline-none font-inter font-semibold text-base"
+//                             />
+//                         </label>
+//                         <button
+//                             type="submit"
+//                             className="w-full h-[45px] bg-[#FF6D3E] text-white text-base font-medium font-Inter rounded-full hover:opacity-80 transition-all duration-200"
+//                             disabled={isLoading}
+//                         >
+//                             {isLoading ? 'Loading...' : 'Contact Us'}
+//                         </button>
+//                     </form>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default Contact;
 
 
 

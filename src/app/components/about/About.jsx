@@ -1,62 +1,23 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import aboutImage from '../../assets/about/about.webp';
 
 const About = () => {
-    const [isVideoLoaded, setIsVideoLoaded] = useState(false);
-    const videoRef = useRef(null);
-
-    const handleVideoLoad = () => {
-        setIsVideoLoaded(true);
-    };
-
-    useEffect(() => {
-        const handleTimeUpdate = () => {
-            if (videoRef.current) {
-                const video = videoRef.current;
-                if (video.currentTime >= video.duration) {
-                    video.currentTime = 0;
-                    video.play();
-                }
-            }
-        };
-
-        const videoElement = videoRef.current;
-        if (videoElement) {
-            videoElement.addEventListener('timeupdate', handleTimeUpdate);
-        }
-
-        return () => {
-            if (videoElement) {
-                videoElement.removeEventListener('timeupdate', handleTimeUpdate);
-            }
-        };
-    }, []);
 
     return (
         <div className="flex flex-col md:flex-row px-4 md:px-5 py-8 bg-[#0F1014] box-border">
             <div className="w-full md:w-1/2">
                 <div className="flex justify-center items-center w-full">
                     {/* Video or fallback image */}
-                    <div className="block md:hidden w-full max-w-[500px] min-w-[220px]">
-                        <img src={aboutImage} alt="About" className="w-full" />
-                    </div>
+                    {/* <div className="block md:hidden w-full max-w-[500px] min-w-[220px]">
+                        <img src='/assets/about/HitnFlop Overview and Rewards.webp' alt="About" className="w-full rounded-xl" />
+                    </div> */}
 
-                    <div className="hidden md:block w-full max-w-[400px] min-w-[220px]">
-                        {!isVideoLoaded && (
-                            <img src={aboutImage} alt="About" className="w-full" />
-                        )}
-                        <video
-                            ref={videoRef}
-                            src="/assets/about.webm"
-                            onCanPlayThrough={handleVideoLoad}
-                            autoPlay
-                            loop
-                            muted
-                            style={{ display: isVideoLoaded ? 'block' : 'none' }}
-                            className="w-full h-auto"
-                        />
+                    {/* <div className="hidden md:block w-full max-w-[480px] min-w-[220px]">
+                        <img src='/assets/about/HitnFlop Overview and Rewards.webp' alt="About" className="w-full rounded-xl" />
+                    </div> */}
+                    <div className="w-full max-w-[480px] min-w-[220px]">
+                        <img src='/assets/about/HitnFlop Overview and Rewards.webp' alt="About" className="w-full rounded-xl" />
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SkeletonLoading from '@/src/app/components/skeletonLoading/SkeletonLoading';
 import Navbar from '@/src/app/components/navbar/Navbar';
@@ -19,6 +19,7 @@ import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import Image from 'next/image';
 //  import { Box, Rating } from "@mui/material";
 import StarIcon from '@mui/icons-material/Star';
+import { addMovie, getMovies } from '@/src/app/lib/store/features/movie/movieSlice';
 
 const Review = () => {
     const dispatch = useDispatch();
@@ -31,14 +32,29 @@ const Review = () => {
         description: '',
     });
 
-    const [movieOptions, setMovieOptions] = useState([
-        'Oppenheimer',
-        'Barbie',
-        'Inception',
-        'Avengers: Endgame',
-        'Interstellar'
-    ]);
+    const { movies } = useSelector((state) => state.movie);
+    // const [movieOptions, setMovieOptions] = useState([
+    //     'Oppenheimer',
+    //     'Barbie',
+    //     'Inception',
+    //     'Avengers: Endgame',
+    //     'Interstellar'
+    // ]);
+    const [movieOptions, setMovieOptions] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState('');
+
+  useEffect(() => {
+    dispatch(getMovies());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (movies && movies.length > 0) {
+        const titles = movies.map((movie) => movie.title || movie.name);
+        setMovieOptions(titles);
+    }
+}, [movies]);
+
+//   const movieOptions = movies.map((movie) => movie.title || movie.name);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -93,15 +109,27 @@ const Review = () => {
 
     const handleSubmitReview = async () => {
         if (!validateForm()) return;
-
         setLoading(true);
-        const payload = {
+        try {
+             // Add movie if not in list
+        if (!movieOptions.includes(selectedMovie)) {
+            const newMoviePayload = {
+                name: selectedMovie,
+            };
+
+            const movieResult = await dispatch(addMovie(newMoviePayload));
+            if (addMovie.rejected.match(movieResult)) {
+                throw new Error("Failed to add movie");
+            }
+            dispatch(getMovies()); // Refresh movie list
+        }
+
+             const payload = {
             ...reviewForm,
             rating: value,
             movie: selectedMovie,
         };
-
-        try {
+        
             const result = await dispatch(addReview(payload));
             if (addReview.fulfilled.match(result)) {
                 toast.success('Review submitted successfully!');
@@ -193,7 +221,7 @@ const Review = () => {
                                         value={reviewForm.name}
                                         onChange={handleInputChange}
                                         placeholder="Enter name"
-                                        className="w-full outline-none text-[#FFFFFF] font-normal font-[family-name:var(--font-roboto)] pl-2 box-border"
+                                        className="w-full bg-transparent outline-none text-[#FFFFFF] font-normal font-[family-name:var(--font-roboto)] pl-2 box-border"
                                     />
                                 </div>
                             </label>
@@ -232,6 +260,10 @@ const Review = () => {
                                                     setMovieOptions((prev) => [...prev, newValue]);
                                                 }
                                                 setSelectedMovie(newValue);
+                                            }}
+                                            onInputChange={(event, newInputValue) => {
+                                                // Keep this updated when the user types manually
+                                                setSelectedMovie(newInputValue);
                                             }}
                                             renderInput={(params) => (
                                                 <TextField
